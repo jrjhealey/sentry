@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import argparse
 from argparse import RawTextHelpFormatter
@@ -37,6 +38,8 @@ parser.add_argument('-q', '--quiet', help="don't print anything to stdout except
                     action='store_true')
 parser.add_argument('--log', help="log style output (timestamps and log level)", action='store_true')
 parser.add_argument('--tag', help='label for process [+]', action='append', metavar='LABEL')
+parser.add_argument('-l', '--login', help="Gmail account to send email from", action='store', default=os.environ.get('GMAIL', None), type=str)
+parser.add_argument('--password', help="Gmail password", action='store', default=os.environ.get('GPASSWORD', None), type=str)
 
 # Just print help and exit if no arguments specified.
 if len(sys.argv) == 1:
@@ -146,7 +149,7 @@ try:
                         else:
                             template = '{executable} process {pid} ended'
                         
-                        comm.send(process=process, subject_format=template, **send_args)
+                        comm.send(args.login, args.password, process=process, subject_format=template, **send_args)
 
             except:
                 logging.exception('Exception encountered while checking or communicating about process {}'.format(pid))
