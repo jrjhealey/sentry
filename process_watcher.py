@@ -11,7 +11,7 @@ __author__ = "Joe R. J. Healey (based upon Arlo White's original)"
 __version__ = "0.1"
 __title__ = "Sentry"
 __license__ = "GPLv3"
-__author_email__ = "jrj.ealey@gmail.com"
+__author_email__ = "jrj.healey@gmail.com"
 
 # TODO:
 # Figure out how to support a generalised email service?
@@ -45,7 +45,7 @@ $ %(prog)s -p 1234 -p 4258 -c myapp* -crx "exec\d+" --to person1@domain.com --to
         parser.add_argument('--to', action='append', metavar='EMAIL_ADDRESS',
                             help='email address to send to [+].')
         parser.add_argument('--channel', action='append',
-                            help='Slack channel to send to [+].)'
+                            help='Slack channel to send to [+].)')
         parser.add_argument('-n', '--notify', action='store_true',
                             help='send DBUS Desktop notification')
         parser.add_argument('-i', '--interval', type=float, default=15.0, metavar='SECONDS',
@@ -56,7 +56,7 @@ $ %(prog)s -p 1234 -p 4258 -c myapp* -crx "exec\d+" --to person1@domain.com --to
                             help="log style output (timestamps and log level)")
         parser.add_argument('--tag', help='label for process [+]', action='append', metavar='LABEL')
         parser.add_argument('-l', '--login', action='store', default=os.environ.get('GMAIL', None), type=str,
-                            help="Originating Mail account (default GMAIL env variable)."
+                            help="Originating Mail account (default GMAIL env variable).")
         parser.add_argument('--password', action='store', default=os.environ.get('GPASSWORD', None), type=str,
                             help='Password for the account specified in -l|-login. Defaults to env variable GPASSWORD.')
         parser.add_argument('--smtp', action='store', default='smtp.gmail.com:587',
@@ -163,7 +163,7 @@ def main():
                                 template = '{executable} process {pid} ended' + ': {}'.format(args.tag)
                             else:
                                 template = '{executable} process {pid} ended'
-                            comm.send(args.login, args.password, process=process, subject_format=template, **send_args)
+                            comm.send(args.login, args.password, args.smtp, process=process, subject_format=template, **send_args)
                 except:
                     logging.exception('Exception encountered while checking or communicating about process {}'.format(pid))
                     if pid not in to_delete:
