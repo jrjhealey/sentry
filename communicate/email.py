@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 
-def send(login, password, to=None, process=None, subject_format='{executable} process {pid} ended'):
+def send(login, password, smtp, to=None, process=None, subject_format='{executable} process {pid} ended'):
     """Send email about the ended process.
 
     :param to: email addresses to send to
@@ -23,12 +23,12 @@ def send(login, password, to=None, process=None, subject_format='{executable} pr
     msg['To'] = ', '.join(to)
 
     # Send the message via our own SMTP server.
-    s = smtplib.SMTP('smtp.gmail.com:587')
+    s = smtplib.SMTP(smtp)
     s.starttls()
     s.login(login, password)
     try:
         logging.info('Sending email to: {}'.format(msg['To']))
         print(msg)
-        s.sendmail("jrj.healey@gmail.com", "jrj.healey@gmail.com", str(msg))
+        s.sendmail(login, to, str(msg))
     finally:
         s.quit()
