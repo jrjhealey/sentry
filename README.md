@@ -28,11 +28,10 @@ PID 18851: /usr/lib/libreoffice/program/soffice.bin --writer --splash-pipe=5
 Access script help with `-h`, `--help`, or no arguments at all.
 
 ```
-usage: process_watcher.py [-h] [-p PID] [-c COMMAND_PATTERN]
-                          [-crx COMMAND_REGEX] [-w] [--to EMAIL_ADDRESS]
-                          [--channel CHANNEL] [-n] [-i SECONDS] [-q] [--log]
-                          [--tag LABEL] [-l LOGIN] [--password PASSWORD]
-                          [--smtp SMTP]
+usage: process_watcher [-h] [-p PID] [-c COMMAND_PATTERN] [-crx COMMAND_REGEX]
+                       [-w] [--to EMAIL_ADDRESS] [--channel CHANNEL] [-n]
+                       [-i SECONDS] [-q] [--log] [--tag LABEL] [-l LOGIN]
+                       [--password PASSWORD] [--smtp SMTP]
 
 Watch a process and notify when it completes via various communication protocols.
 (See README.md for help installing dependencies)
@@ -44,7 +43,7 @@ $ (prog)s -p 123 --to me@email.com
 A more complex invocation:
  ([+] indicates the argument may be specified multiple times)
 
-$ process_watcher.py -p 1234 -p 4258 -c myapp* -crx "exec\d+" --to person1@domain.com --to person2@someplace.com
+$ process_watcher -p 1234 -p 4258 -c myapp* -crx "exec\d+" --to person1@domain.com --to person2@someplace.com
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -65,7 +64,7 @@ optional arguments:
   -l LOGIN, --login LOGIN
                         Originating Mail account (default GMAIL env variable).
   --password PASSWORD   Password for the account specified in -l|-login. Defaults to env variable GPASSWORD.
-  --smtp SMTP           SMTP server address for email service. (default GMAIl)
+  --smtp SMTP           SMTP server address for email service. (default Gmail: smtp.gmail.com:587)
 ```
 
 # Installation

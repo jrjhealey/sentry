@@ -60,7 +60,7 @@ $ %(prog)s -p 1234 -p 4258 -c myapp* -crx "exec\d+" --to person1@domain.com --to
         parser.add_argument('--password', action='store', default=os.environ.get('GPASSWORD', None), type=str,
                             help='Password for the account specified in -l|-login. Defaults to env variable GPASSWORD.')
         parser.add_argument('--smtp', action='store', default='smtp.gmail.com:587',
-                            help='SMTP server address for email service. (default GMAIl)')
+                            help='SMTP server address for email service. (default Gmail: smtp.gmail.com:587)')
     
         if len(sys.argv) == 1:
             parser.print_help(sys.stderr)
