@@ -14,7 +14,9 @@ __license__ = "GPLv3"
 __author_email__ = "jrj.healey@gmail.com"
 
 # TODO:
-# Figure out how to support a generalised email service?
+# - Sentry should perform all communications checks *before* waiting for the process to finish
+#   else failure to communicate may not be realised until process has completed.
+# - Figure out how to support a generalised email service?
 
 def get_args():
     '''Process command line arguments.'''
